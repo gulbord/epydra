@@ -1,4 +1,33 @@
 import re
+from abc import ABC, abstractmethod
+from os import PathLike
+from pathlib import Path
+from typing import override
+
+import polars as pl
+
+
+class Reader(ABC):
+    path: Path
+
+    @abstractmethod
+    def read(self) -> pl.DataFrame:
+        pass
+
+
+class CSVReader(Reader):
+    path: Path
+
+    def __init__(self, path: PathLike[str]) -> None:
+        self.path = _normalize_path(path)
+
+    @override
+    def read(self) -> pl.DataFrame:
+        return pl.read_csv(self.path, encoding="latin-1", has_header=False)
+
+
+def _normalize_path(path: PathLike[str]) -> Path:
+    return Path(path).expanduser().resolve()
 
 
 def station_code(path):
