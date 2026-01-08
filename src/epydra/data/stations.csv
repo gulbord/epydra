@@ -1,0 +1,45 @@
+sirav,eoi,name,class,subclass,prov,lon,lat,alt,zone_name,zone_code
+502505,IT1594A,Parco Citta di Bologna,Fondo,Urbano,BL,12.21758,46.14193,394,Fondovalle,IT0526
+502509,IT2245A,La Cerva,Traffico,Urbano,BL,12.21279,46.14376,403,Fondovalle,IT0526
+502506,IT1619A,Area Feltrina,Fondo,Suburbano,BL,11.90675,46.03127,295,Fondovalle,IT0526
+502507,IT1790A,Pieve d'Alpago,Fondo,Rurale,BL,12.36131,46.16253,612,Prealpi e Alpi,IT0525
+502808,IT1453A,Mandria,Fondo,Urbano,PD,11.84084,45.37101,12,Agglomerato PD,IT0519
+502809,IT1880A,Arcella,Traffico,Urbano,PD,11.8897,45.43291,12,Agglomerato PD,IT0519
+502813,IT2070A,Granze,Industriale,Urbano,PD,11.93996,45.37757,9,Agglomerato PD,IT0519
+999902,NA,Aps1,Industriale,Urbano,PD,11.90932,45.3947,10,Agglomerato PD,IT0519
+999903,NA,Aps2,Industriale,Urbano,PD,11.90739,45.41468,11,Agglomerato PD,IT0519
+502814,IT2071A,Alta Padovana,Fondo,Rurale,PD,11.90355,45.60158,28,Pianura,IT0522
+502811,IT1871A,Este,Industriale,Suburbano,PD,11.66618,45.22693,11,Pianura,IT0522
+999910,NA,Monselice,Fondo,Urbano,PD,11.74409,45.23799,7,Pianura,IT0522
+502812,IT1870A,Parco Colli Euganei,Fondo,Rurale,PD,11.64239,45.28937,13,Zona Costiera e Colli,IT0523
+502903,IT1213A,Adria,Fondo,Urbano,RO,12.06087,45.04583,1,Zona Costiera e Colli,IT0523
+502901,IT1215A,Largo Martiri,Traffico,Urbano,RO,11.78255,45.07387,7,Pianura,IT0522
+502902,IT1214A,Borsea,Fondo,Urbano,RO,11.79015,45.03876,4,Pianura,IT0522
+502969,IT2072A,Badia Polesine,Fondo,Rurale,RO,11.55324,45.10408,7,Pianura,IT0522
+502604,IT1328A,Conegliano,Fondo,Urbano,TV,12.30712,45.88973,62,Zona Pedemontana,IT0524
+502609,IT1596A,Mansue,Fondo,Rurale,TV,12.51036,45.83694,11,Pianura,IT0522
+502608,IT1590A,Via Lancieri,Fondo,Urbano,TV,12.23781,45.67172,15,Agglomerato TV,IT0518
+502612,IT2231A,S. Agnese,Traffico,Urbano,TV,12.21618,45.6588,15,Agglomerato TV,IT0518
+999913,NA,Pederobba,Fondo,Urbano,TV,11.99117,45.85773,174,Zona Pedemontana,IT0524
+502715,IT1222A,S. Dona di Piave,Fondo,Urbano,VE,12.59068,45.62909,1,Zona Costiera e Colli,IT0523
+502723,IT1936A,Malcontenta,Industriale,Suburbano,VE,12.20553,45.43826,2,Agglomerato VE,IT0517
+502701,IT0963A,Parco Bissuola,Fondo,Urbano,VE,12.26125,45.49962,1,Agglomerato VE,IT0517
+502717,IT0448A,Sacca Fisola,Fondo,Urbano,VE,12.31293,45.42842,1,Agglomerato VE,IT0517
+502720,IT1862A,Via Tagliamento,Traffico,Urbano,VE,12.21753,45.4896,3,Agglomerato VE,IT0517
+502721,IT1934A,Via Beccaria,Traffico,Urbano,VE,12.2197,45.47457,2,Agglomerato VE,IT0517
+502415,IT1791A,Asiago Cima Ekar,Fondo,Rurale,VI,11.56906,45.84863,1360,Prealpi e Alpi,IT0525
+502401,IT1065A,Bassano del Grappa,Fondo,Urbano,VI,11.73585,45.75927,114,Zona Pedemontana,IT0524
+502416,IT1833A,Chiampo,Industriale,Urbano,VI,11.29379,45.53645,154,Agglomerato VI,IT0520
+502404,IT0663A,Schio,Fondo,Urbano,VI,11.36766,45.71356,189,Zona Pedemontana,IT0524
+502409,IT1177A,Quartiere Italia,Fondo,Urbano,VI,11.53865,45.55956,37,Agglomerato VI,IT0520
+502414,IT1838A,S. Felice,Traffico,Urbano,VI,11.53318,45.54499,34,Agglomerato VI,IT0520
+502417,IT1905A,Ferrovieri,Fondo,Urbano,VI,11.52217,45.53226,34,Agglomerato VI,IT0520
+502314,IT1848A,Boscochiesanuova,Fondo,Rurale,VR,11.03691,45.5892,824,Prealpi e Alpi,IT0525
+502313,IT1535A,Legnago,Fondo,Urbano,VR,11.31051,45.18263,15,Pianura,IT0522
+502310,IT1340A,S. Bonifacio,Traffico,Urbano,VR,11.2853,45.39883,31,Pianura,IT0522
+502304,IT1336A,Borgo Milano,Traffico,Urbano,VR,10.95395,45.44522,68,Agglomerato VR,IT0521
+502315,IT2243A,Giarol Grande,Fondo,Suburbano,VR,11.03057,45.43341,48,Agglomerato VR,IT0521
+502726,IT2319A,Rio Novo,Traffico,Urbano,VE,12.32313,45.43557,1,Agglomerato VE,IT0517
+999912,NA,Portogruaro,Fondo,Urbano,VE,12.83552,45.77664,4,Zona Costiera e Colli,IT0523
+999914,NA,Punta Fusina,Industriale,Suburbana,VE,12.25386,45.42263,2,Agglomerato VE,IT0517
+502418,IT2320A,Zermeghedo,Industriale,Urbano,VI,11.37833,45.47848,61,Agglomerato VI,IT0520

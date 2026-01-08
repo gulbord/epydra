@@ -1,0 +1,38 @@
+{
+  "BENZENE": {
+    "unit": "µg/m3",
+    "phase": "gas"
+  },
+  "CO": {
+    "unit": "mg/m3",
+    "phase": "gas"
+  },
+  "NO": {
+    "unit": "µg/m3",
+    "phase": "gas"
+  },
+  "NO2": {
+    "unit": "µg/m3",
+    "phase": "gas"
+  },
+  "NOx": {
+    "unit": "µg/m3",
+    "phase": "gas"
+  },
+  "O3": {
+    "unit": "µg/m3",
+    "phase": "gas"
+  },
+  "PM10": {
+    "unit": "µg/m3",
+    "phase": "particulate"
+  },
+  "PM2.5": {
+    "unit": "µg/m3",
+    "phase": "particulate"
+  },
+  "SO2": {
+    "unit": "µg/m3",
+    "phase": "gas"
+  }
+}
