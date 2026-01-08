@@ -19,7 +19,9 @@ def column_names(path):
 
 def read_auto(path, resolution, with_sirav=False):
     try:
-        data = pl.read_csv(path, skip_rows=4, encoding="latin-1")
+        data = pl.read_csv(
+            path, skip_rows=4, encoding="latin-1", has_header=False
+        )
         data.columns = column_names(path)
     except (OSError, ValueError):
         return pl.DataFrame()
