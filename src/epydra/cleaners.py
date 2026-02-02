@@ -1,6 +1,7 @@
 import string
 from abc import ABC, abstractmethod
 from collections import defaultdict
+from datetime import datetime
 from typing import override
 
 import polars as pl
@@ -103,8 +104,18 @@ class ManualCleaner(Cleaner):
         )
 
     def _group_by_date(self, lf: pl.LazyFrame) -> pl.LazyFrame:
-        return lf.group_by(DATE_COLUMN, maintain_order=True).agg(
-            cs.all().last(ignore_nulls=True)
+        year = lf.first().collect()[DATE_COLUMN].dt.year().item()
+        dates = pl.date_range(
+            datetime(year, 1, 1),
+            datetime(year, 12, 31),
+            interval="1d",
+            eager=True,
+        )
+        return (
+            pl.LazyFrame({DATE_COLUMN: dates})
+            .join(lf, on=DATE_COLUMN, how="left")
+            .group_by(DATE_COLUMN, maintain_order=True)
+            .agg(cs.all().last(ignore_nulls=True))
         )
 
     @override
