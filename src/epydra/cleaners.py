@@ -51,7 +51,7 @@ class AutomaticCleaner(Cleaner):
                 )
                 .unnest(cs.struct())
                 .with_columns(pl.col(HOUR_COLUMN).cast(pl.UInt8))
-                .select(DATE_COLUMN, HOUR_COLUMN, columns[1:])
+                .select(DATE_COLUMN, HOUR_COLUMN, *columns[1:])
             )
         return lf.rename({columns[0]: DATE_COLUMN})
 
