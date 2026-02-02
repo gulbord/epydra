@@ -19,8 +19,7 @@ def normalize_column_names(lf: pl.LazyFrame) -> pl.LazyFrame:
 
 
 def filter_pollutants(lf: pl.LazyFrame, pollutants: list[str]) -> pl.LazyFrame:
-    if not pollutants:
-        return lf
+    pollutants = pollutants or list(load_pollutant_units())
     return lf.select(
         cs.by_name(DATE_COLUMN, HOUR_COLUMN, *pollutants, require_all=False)
     )
