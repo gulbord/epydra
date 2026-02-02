@@ -68,7 +68,7 @@ def main():
         raise FileNotFoundError(f"no matching files found in {args.in_dir}")
 
     with cf.ProcessPoolExecutor() as executor:
-        futures = [
+        futures = {
             executor.submit(
                 clean_file,
                 path=path,
@@ -76,16 +76,16 @@ def main():
                 pollutants=args.pollutants,
                 with_sirav=args.merge,
                 verbose=args.verbose,
-            )
+            ): path
             for path in files
-        ]
-        results = [f.result() for f in cf.as_completed(futures)]
+        }
+        results = [(futures[f], f.result()) for f in cf.as_completed(futures)]
 
     if not results:
         raise RuntimeError("all input files were empty!")
 
     if args.merge:
-        merged = merge_results(results)
+        merged = merge_results([data for _, data in results])
         write_merged(
             merged,
             out_dir=args.out_dir,
@@ -94,7 +94,7 @@ def main():
             verbose=args.verbose,
         )
     else:
-        for data, path in zip(results, files):
+        for path, data in results:
             write_individual(
                 data,
                 path,
