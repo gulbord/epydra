@@ -1,11 +1,23 @@
 {
-  "BENZENE": {
+  "Arsenico (As)": {
+    "unit": "ng/m3",
+    "phase": "solid"
+  },
+  "Benzene": {
     "unit": "µg/m3",
     "phase": "gas"
+  },
+  "Cadmio (Cd)": {
+    "unit": "ng/m3",
+    "phase": "solid"
   },
   "CO": {
     "unit": "mg/m3",
     "phase": "gas"
+  },
+  "Nichel (Ni)": {
+    "unit": "ng/m3",
+    "phase": "solid"
   },
   "NO": {
     "unit": "µg/m3",
@@ -23,13 +35,17 @@
     "unit": "µg/m3",
     "phase": "gas"
   },
+  "Piombo (Pb)": {
+    "unit": "ng/m3",
+    "phase": "solid"
+  },
   "PM10": {
     "unit": "µg/m3",
-    "phase": "particulate"
+    "phase": "solid"
   },
   "PM2.5": {
     "unit": "µg/m3",
-    "phase": "particulate"
+    "phase": "solid"
   },
   "SO2": {
     "unit": "µg/m3",

@@ -1,32 +1,80 @@
-import re
+from abc import ABC, abstractmethod
+from pathlib import Path
+from typing import Literal, override
+
+import polars as pl
+
+from epydra.types import FilenamePrefixError, SiravCodeError
 
 
-def station_code(path):
+class Reader(ABC):
+    path: Path
+    sirav_code: int
+
+    def __init__(self, path: Path) -> None:
+        self.path = _validate_path(path)
+        self.sirav_code = _get_sirav_code(self.path)
+
+    @abstractmethod
+    def read(self) -> pl.DataFrame: ...
+
+
+class CSVReader(Reader):
+    @override
+    def read(self) -> pl.DataFrame:
+        try:
+            return pl.read_csv(
+                self.path,
+                encoding="latin-1",
+                has_header=False,
+                infer_schema=False,
+                truncate_ragged_lines=True,
+            )
+        except pl.exceptions.NoDataError:
+            return pl.DataFrame()
+
+
+def _validate_path(path: Path) -> Path:
+    path = path.expanduser().resolve()
     filename = path.name
-    match = re.search(r"[H|D|M]_\d{4}_(\d+)_.*", filename)
-    if match is not None:
-        return int(match.group(1))
-    return None
+    if filename[0] not in ("H", "D", "M"):
+        raise FilenamePrefixError(filename)
+    return path
 
 
-def write_merged(merged, out_dir, resolution, excel, verbose):
-    out_path = out_dir / f"merged_{resolution.upper()}"
-    if excel:
-        out_path = out_path.with_suffix(".xlsx")
-        merged.write_excel(out_path)
+def _get_sirav_code(path: Path) -> int:
+    filename = path.name
+    try:
+        return int(filename[7:13])
+    except ValueError:
+        raise SiravCodeError(filename)
+
+
+def make_reader(path: Path) -> Reader:
+    if path.suffix != ".csv":
+        raise NotImplementedError(
+            f"file extension '{path.suffix}' is not supported"
+        )
+    return CSVReader(path)
+
+
+def write_dataframe(
+    data: pl.DataFrame,
+    path: Path,
+    *,
+    format: Literal["csv", "xlsx"],
+    verbose: bool = False,
+) -> Path | None:
+    if data.is_empty():
+        if verbose:
+            print(f"Skipping empty file {path}")
+        return None
+
+    path = _validate_path(path).with_suffix("." + format)
+    if format == "csv":
+        data.write_csv(path)
     else:
-        out_path = out_path.with_suffix(".csv")
-        merged.write_csv(out_path)
+        data.write_excel(path)  # pyright: ignore[reportUnknownMemberType]
     if verbose:
-        print(f"Written merged file to {out_path}")
-
-
-def write_individual(data, path, out_dir, excel, verbose):
-    out_path = out_dir / path.name
-    if excel:
-        out_path = out_path.with_suffix(".xlsx")
-        data.write_excel(out_path)
-    else:
-        data.write_csv(out_path)
-    if verbose:
-        print(f"Written to {out_path}")
+        print(f"Written to {path}")
+    return path
