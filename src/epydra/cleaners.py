@@ -1,4 +1,3 @@
-import re
 import string
 from abc import ABC, abstractmethod
 from collections import defaultdict
@@ -143,7 +142,8 @@ def _extract_column_names(df: pl.DataFrame, skip: int) -> list[str]:
         raise ValueError("header row not found")
 
     names = [
-        re.sub(r"\s+", "", x or "") or str(i) for i, x in enumerate(header)
+        (x.strip() if x is not None else "") or str(i)
+        for i, x in enumerate(header)
     ]
 
     seen: dict[str, int] = defaultdict(int)
