@@ -7,6 +7,10 @@
     "unit": "µg/m3",
     "phase": "gas"
   },
+  "Benzo(a)pirene": {
+    "unit": "ng/m3",
+    "phase": "solid"
+  },
   "Cadmio (Cd)": {
     "unit": "ng/m3",
     "phase": "solid"
