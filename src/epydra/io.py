@@ -27,7 +27,7 @@ class CSVReader(Reader):
                 self.path,
                 encoding="latin-1",
                 has_header=False,
-                infer_schema=False,
+                infer_schema_length=3,
                 truncate_ragged_lines=True,
             )
         except pl.exceptions.NoDataError:
@@ -71,10 +71,12 @@ def write_dataframe(
         return None
 
     path = _validate_path(path).with_suffix("." + format)
+    if verbose:
+        print(f"Writing {path}")
+
     if format == "csv":
         data.write_csv(path)
     else:
         data.write_excel(path)  # pyright: ignore[reportUnknownMemberType]
-    if verbose:
-        print(f"Written to {path}")
+
     return path
