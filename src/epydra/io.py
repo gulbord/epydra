@@ -3,8 +3,14 @@ from pathlib import Path
 from typing import Literal, override
 
 import polars as pl
+import polars.selectors as cs
 
-from epydra.types import FilenamePrefixError, SiravCodeError
+from epydra.types import (
+    DATE_COLUMN,
+    HOUR_COLUMN,
+    FilenamePrefixError,
+    SiravCodeError,
+)
 
 
 class Reader(ABC):
@@ -77,6 +83,14 @@ def write_dataframe(
     if format == "csv":
         data.write_csv(path)
     else:
-        _ = data.write_excel(path, autofit=True)
-
+        _ = data.map_columns(  # pyright: ignore[reportCallIssue]
+            cs.exclude(DATE_COLUMN, HOUR_COLUMN),
+            lambda s: (
+                s.cast(pl.Float64)
+                if s.str.contains(".", literal=True).any()
+                else s.cast(pl.Int64)
+            ),
+        ).write_excel(
+            path, autofit=True, dtype_formats={pl.Float64: "0.######"}
+        )
     return path
