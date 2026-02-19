@@ -1,6 +1,6 @@
 [project]
 name = "epydra"
-version = "0.2.3"
+version = "0.3.0"
 readme = "README.md"
 authors = [
     { name = "gulbord", email = "guglielmo.bordin@gmail.com" }
@@ -8,6 +8,7 @@ authors = [
 requires-python = ">=3.13"
 dependencies = [
     "polars>=1.37.1",
+    "xlsxwriter>=3.2.9",
 ]
 
 [project.scripts]
