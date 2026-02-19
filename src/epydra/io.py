@@ -77,6 +77,6 @@ def write_dataframe(
     if format == "csv":
         data.write_csv(path)
     else:
-        data.write_excel(path)  # pyright: ignore[reportUnknownMemberType]
+        _ = data.write_excel(path, autofit=True)
 
     return path
