@@ -83,12 +83,6 @@ class AutomaticCleaner(Cleaner):
 class ManualCleaner(Cleaner):
     reader: Reader
 
-    def _remove_extra_rows(self, df: pl.DataFrame) -> pl.DataFrame:
-        df = df.slice(3)
-        if "Note chimica" in df.columns:
-            return df.filter(pl.col("Note chimica") == " ")
-        return df
-
     def _remove_extra_columns(self, lf: pl.LazyFrame) -> pl.LazyFrame:
         return lf.select(
             cs.exclude(
@@ -126,7 +120,7 @@ class ManualCleaner(Cleaner):
         except (OSError, ValueError):
             return pl.LazyFrame()
 
-        data = self._remove_extra_rows(data)
+        data = data.slice(3)
         if data.is_empty():
             return data.lazy()
 

@@ -30,11 +30,7 @@ class CSVReader(Reader):
     def read(self) -> pl.DataFrame:
         try:
             return pl.read_csv(
-                self.path,
-                encoding="latin-1",
-                has_header=False,
-                infer_schema_length=3,
-                truncate_ragged_lines=True,
+                self.path, encoding="latin-1", has_header=False, separator=";"
             )
         except pl.exceptions.NoDataError:
             return pl.DataFrame()
