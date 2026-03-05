@@ -81,7 +81,7 @@ def write_dataframe(
             print(f"Skipping empty file {path}")
         return None
 
-    path = _validate_path(path).with_suffix("." + format)
+    path = path.expanduser().resolve().with_suffix("." + format)
     if verbose:
         pollutants = _get_pollutant_names(data)
         print(f"Writing {', '.join(pollutants)} in {path.name}")

@@ -7,9 +7,8 @@ import polars.selectors as cs
 from epydra.resources import (
     load_pollutant_names,
     load_pollutant_units,
-    load_stations,
 )
-from epydra.types import DATE_COLUMN, HOUR_COLUMN
+from epydra.types import DATE_COLUMN, HOUR_COLUMN, SIRAV_COLUMN
 
 
 def normalize_column_names(lf: pl.LazyFrame) -> pl.LazyFrame:
@@ -21,7 +20,13 @@ def normalize_column_names(lf: pl.LazyFrame) -> pl.LazyFrame:
 def filter_pollutants(lf: pl.LazyFrame, pollutants: list[str]) -> pl.LazyFrame:
     pollutants = pollutants or list(load_pollutant_units())
     return lf.select(
-        cs.by_name(DATE_COLUMN, HOUR_COLUMN, *pollutants, require_all=False)
+        cs.by_name(
+            DATE_COLUMN,
+            HOUR_COLUMN,
+            SIRAV_COLUMN,
+            *pollutants,
+            require_all=False,
+        )
     )
 
 
@@ -49,7 +54,14 @@ def remove_null_columns(lf: pl.LazyFrame) -> pl.DataFrame:
 
 
 def merge_results(dfs: Sequence[pl.DataFrame]) -> pl.DataFrame:
-    stations_data = load_stations().select("sirav", "lon", "lat")
-    return pl.concat(dfs, how="diagonal_relaxed", rechunk=True).join(
-        stations_data, on="sirav", how="left"
+    merged = pl.concat(dfs, how="diagonal_relaxed")
+    first_cols = (
+        (SIRAV_COLUMN, DATE_COLUMN, HOUR_COLUMN)
+        if HOUR_COLUMN in merged.columns
+        else (SIRAV_COLUMN, DATE_COLUMN)
+    )
+    return (
+        pl.concat(dfs, how="diagonal_relaxed", rechunk=True)
+        .select(*first_cols, pl.exclude(first_cols))
+        .sort(first_cols)
     )
