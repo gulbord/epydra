@@ -8,6 +8,7 @@ import polars.selectors as cs
 from epydra.types import (
     DATE_COLUMN,
     HOUR_COLUMN,
+    SIRAV_COLUMN,
     FilenamePrefixError,
     SiravCodeError,
 )
@@ -60,6 +61,14 @@ def make_reader(path: Path) -> Reader:
     return CSVReader(path)
 
 
+def _get_pollutant_names(data: pl.DataFrame) -> list[str]:
+    return [
+        c.split(" ")[0]
+        for c in data.columns
+        if c not in (DATE_COLUMN, HOUR_COLUMN, SIRAV_COLUMN)
+    ]
+
+
 def write_dataframe(
     data: pl.DataFrame,
     path: Path,
@@ -74,7 +83,8 @@ def write_dataframe(
 
     path = _validate_path(path).with_suffix("." + format)
     if verbose:
-        print(f"Writing {path}")
+        pollutants = _get_pollutant_names(data)
+        print(f"Writing {', '.join(pollutants)} in {path.name}")
 
     if format == "csv":
         data.write_csv(path)
